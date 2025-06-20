@@ -1,8 +1,8 @@
 {
-  "name": "my-template",
+  "name": "top-weather-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.common.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "eslint ./src && webpack serve --open --config webpack.dev.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sekaii22/my-template.git"
+    "url": "git+https://github.com/Sekaii22/top-weather-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sekaii22/my-template/issues"
+    "url": "https://github.com/Sekaii22/top-weather-app/issues"
   },
-  "homepage": "https://github.com/Sekaii22/my-template#readme",
+  "homepage": "https://github.com/Sekaii22/top-weather-app#readme",
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "eslint": "^9.29.0",
