@@ -8,9 +8,81 @@
     <script type="module" src="index.js"></script>
 </head>
 <body>
-    <form>
-        <input id="search-input" type="text" placeholder="location" required>
-        <button>Search</button>
-    </form>
+    <div class="content">
+        <div class="search-container">
+            <form>
+                <input id="search-input" type="text" placeholder="location" required>
+                <button id="search-btn">Search</button>
+            </form>
+        </div>
+
+        <div class="current-weather">
+            <div class="current-top">
+                <div class="top-left">
+                    <img class="current-icon" src="../assets/icons/2nd Set - Color/rain.svg" alt="rain icon" width="100px" height="100px">
+                    <p class="current-temp">28<span class="temp-unit">&deg;C</span></p>
+                </div>
+                <div class="top-right">
+                    <p class="current-datetime">Saturday 2:00 am</p>
+                    <p class="current-desc">Cloudy</p>
+                </div>
+            </div>
+
+            <div class="current-mid">
+                <div class="current-stat-group">
+                    <p class="current-stat">Precipitation: 0%</p>
+                    <p class="current-stat">Humidity: 80%</p>
+                    <p class="current-stat">Wind: 8km/h</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-forecasts">
+            <div class="forecast-container">
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+                <button class="forecast">
+                    <p class="day-of-week">Sat</p>
+                    <img class="icon" src="../assets/icons/2nd Set - Color/cloudy.svg" width="50px" height="50px">
+                    <p class="temp">31<span class="temp-unit">&deg;</span> | 27<span class="temp-unit">&deg;</span></p>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+<!-- 
+
+
+        
+
+-->

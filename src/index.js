@@ -41,7 +41,7 @@ function processWeatherData(data) {
 
 const form = document.querySelector("form");
 const input = document.querySelector("#search-input");
-const btn = document.querySelector("button");
+const btn = document.querySelector("#search-btn");
 
 form.addEventListener("submit", (e) => {
     if (form.checkValidity()) {
