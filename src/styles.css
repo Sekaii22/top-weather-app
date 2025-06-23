@@ -64,12 +64,12 @@ form {
     background-color: rgb(89, 132, 213);
 }
 
-/* current */
-.current-weather {
+/* highlight */
+.highlight-weather {
     margin-bottom: 20px;
 }
 
-.current-top {
+.highlight-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -83,12 +83,12 @@ form {
     gap: 16px;
 }
 
-.current-icon {
+.highlight-icon {
     width: 110px;
     height: 110px;
 }
 
-.current-temp {
+.highlight-temp {
     font-size: 2.7rem;
 }
 
@@ -101,22 +101,22 @@ form {
     text-align: right;
 }
 
-.current-datetime,
-.current-stat {
+.highlight-datetime,
+.highlight-stat {
     white-space: nowrap;
 }
 
-.current-mid {
+.highlight-bottom {
     margin-bottom: 20px;
 }
 
-.current-stat-group p {
-    font-size: 1.3rem;
+.highlight-stat-group p {
+    font-size: 1.1rem;
     line-height: 2rem;
 }
 
 /* forecasts */
-.forecast-container {
+.weather-forecasts {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 150px;
