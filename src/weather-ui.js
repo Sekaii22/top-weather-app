@@ -109,7 +109,7 @@ function createForecasts(days) {
             icon.src = module.default;
         });
         temp.classList.add("temp");
-        temp.innerHTML = `${day.tempmin}<span class="temp-unit">&deg;</span> | ${day.tempmax}<span class="temp-unit">&deg;</span>`;
+        temp.innerHTML = `${day.tempmin}<span class="temp-unit">&deg;</span> ~ ${day.tempmax}<span class="temp-unit">&deg;</span>`;
     
         btn.addEventListener("click", () => {
             const btns = [...document.querySelectorAll(".forecast")];
