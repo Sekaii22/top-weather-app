@@ -20,25 +20,25 @@ function processWeatherData(data) {
             conditions: data.currentConditions.conditions,
             icon: data.currentConditions.icon,
             description: data.days[0].description,
-            feelslike: data.currentConditions.feelslike,
-            humidity: data.currentConditions.humidity,
+            feelslike: Math.round(data.currentConditions.feelslike),
+            humidity: Math.round(data.currentConditions.humidity),
             precipprob: data.currentConditions.precipprob,
-            temp: data.currentConditions.temp,
+            temp: Math.round(data.currentConditions.temp),
             uvindex: data.currentConditions.uvindex,
-            windspeed: data.currentConditions.windspeed
+            windspeed: Math.round(data.currentConditions.windspeed)
         },
         days: data.days.map((day) => ({
             date: new Date(day.datetime),
             conditions: day.conditions,
             icon: day.icon,
             description: day.description,
-            humidity: day.humidity,
+            humidity: Math.round(day.humidity),
             precipprob: day.precipprob,
-            temp: day.temp,
-            tempmax: day.tempmax,
-            tempmin: day.tempmin,
+            temp: Math.round(day.temp),
+            tempmax: Math.round(day.tempmax),
+            tempmin: Math.round(day.tempmin),
             uvindex: day.uvindex,
-            windspeed: day.windspeed
+            windspeed: Math.round(day.windspeed)
         })),
     }
 }
@@ -128,6 +128,39 @@ function createForecasts(days) {
     container.classList.add("weather-forecasts");
 
     // weather forecasts children
+    days.forEach((day, index) => {
+        const btn = document.createElement("button");
+        const dayOfWeek = document.createElement("p");
+        const icon = document.createElement("img");
+        const temp = document.createElement("p");
+        container.appendChild(btn);
+        btn.appendChild(dayOfWeek);
+        btn.appendChild(icon);
+        btn.appendChild(temp);
+
+        btn.classList.add("forecast");
+        if (index === 0) {
+            btn.classList.add("active");
+        }
+        dayOfWeek.classList.add("day-of-week");
+        dayOfWeek.textContent = day.date.toLocaleDateString(undefined, {weekday: "short", month: "short", day: "numeric"});
+        icon.classList.add("icon");
+        import(`../assets/icons/weather/${day.icon}.svg`).then((module) => {
+            icon.src = module.default;
+        });
+        temp.classList.add("temp");
+        temp.innerHTML = `${day.tempmax}<span class="temp-unit">&deg;</span> | ${day.tempmin}<span class="temp-unit">&deg;</span>`;
+    
+        btn.addEventListener("click", () => {
+            const btns = [...document.querySelectorAll(".forecast")];
+            btns.forEach((b) => b.classList.remove("active"));
+
+            const weather = document.querySelector("#weather");
+            const newHighlight = createHighlightWeather(day);
+            weather.replaceChild(newHighlight, weather.firstChild);
+            btn.classList.add("active");
+        });
+    });
 
     return container
 }
@@ -138,10 +171,9 @@ function showWeather(weatherData) {
     const content = document.querySelector(".content");
     const weather = document.createElement("section");
     content.appendChild(weather);
-    weather.appendChild(createHighlightWeather(weatherData.currentConditions));
+    weather.appendChild(createHighlightWeather(weatherData.days[0]));
     weather.appendChild(createForecasts(weatherData.days));
     weather.id = "weather";
-
 }
 
 const form = document.querySelector("form");
