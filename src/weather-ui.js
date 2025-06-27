@@ -149,6 +149,7 @@ function showWeather(weatherData) {
 
 function showLoading() {
     removeWeather();
+
     const content = document.querySelector(".content");
     const weather = document.createElement("section");
     const loader = document.createElement("div");
@@ -159,4 +160,18 @@ function showLoading() {
     loader.classList.add("loader");
 }
 
-export { showWeather, showLoading }
+function showError() {
+    removeWeather();
+
+    const content = document.querySelector(".content");
+    const weather = document.createElement("section");
+    const errorText = document.createElement("p");
+    content.appendChild(weather);
+    weather.appendChild(errorText);
+
+    weather.id = "weather";
+    errorText.classList.add("error-text");
+    errorText.textContent = "Error encountered, make sure the location does exists."
+}
+
+export { removeWeather, showWeather, showLoading, showError }
