@@ -199,6 +199,18 @@ function showWeather(weatherData) {
     forecastHeading.textContent = "Weather Forecast";
 }
 
+function showLoading() {
+    removeWeather();
+    const content = document.querySelector(".content");
+    const weather = document.createElement("section");
+    const loader = document.createElement("div");
+    content.appendChild(weather);
+    weather.appendChild(loader);
+
+    weather.id = "weather";
+    loader.classList.add("loader");
+}
+
 const form = document.querySelector("form");
 const input = document.querySelector("#search-input");
 // const btn = document.querySelector("#search-btn");
@@ -209,5 +221,6 @@ form.addEventListener("submit", (e) => {
 
         const location = input.value;
         getWeather(location).then(showWeather);
+        showLoading();
     }
 });
