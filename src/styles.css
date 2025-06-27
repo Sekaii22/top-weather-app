@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1rem;
     color: black;
 }
@@ -24,6 +25,10 @@ body {
     max-width: 1200px;
     width: 100%;
     padding: 30px;
+}
+
+.heading {
+    font-size: 2rem;
 }
 
 /* search */
@@ -64,12 +69,20 @@ form {
     background-color: rgb(89, 132, 213);
 }
 
-/* highlight */
-.highlight-weather {
+/* weather banner */
+.weather-banner {
     margin-bottom: 20px;
+    /* background-color: cornflowerblue; */
+    border-radius: 10px;
+    padding: 20px;
 }
 
-.highlight-top {
+.highlight {
+    border: 5px solid black;
+    background-color: transparent;
+}
+
+.banner-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -77,18 +90,22 @@ form {
     margin-bottom: 20px;
 }
 
-.top-left {
+.banner-top-left {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.highlight-icon {
+.banner-icon {
     width: 110px;
     height: 110px;
+    /* border: 5px solid black; */
+    /* border-radius: 50%;
+    padding: 10px;
+    background-color: white; */
 }
 
-.highlight-temp {
+.banner-temp {
     font-size: 2.7rem;
 }
 
@@ -96,23 +113,22 @@ form {
     vertical-align: text-top;
 }
 
-.top-right p {
+.banner-top-right {
+    align-self: flex-start;
+}
+
+.banner-top-right p {
     font-size: 1.3rem;
     text-align: right;
 }
 
-.highlight-datetime,
-.highlight-stat {
+.banner-datetime,
+.banner-stat {
     white-space: nowrap;
 }
 
-.highlight-bottom {
-    margin-bottom: 20px;
-}
-
-.highlight-stat-group p {
+.banner-stat-group p {
     font-size: 1.1rem;
-    line-height: 2rem;
 }
 
 /* forecasts */
@@ -121,6 +137,7 @@ form {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 150px;
     gap: 10px;
+    margin: 20px 0;
 }
 
 .forecast {
@@ -148,3 +165,4 @@ form {
     background-color: hsl(from white h s 70%);
     opacity: 85%;
 }
+

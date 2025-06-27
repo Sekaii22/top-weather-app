@@ -60,11 +60,14 @@ function removeWeather() {
     }
 }
 
-function createHighlightWeather(highlight) {
+function createWeatherBanner(weatherData, curr=false) {
     const container = document.createElement("div");
-    container.classList.add("highlight-weather");
+    container.classList.add("weather-banner");
+    if (!curr) {
+        container.classList.add("highlight");
+    }
 
-    // current highlighted weather's children
+    // weather's children
     const top = document.createElement("div");
     const topLeft = document.createElement("div");
     const topRight = document.createElement("div");
@@ -80,20 +83,23 @@ function createHighlightWeather(highlight) {
     topRight.appendChild(dateTime);
     topRight.appendChild(desc);
 
-    top.classList.add("highlight-top");
-    topLeft.classList.add("top-left");
-    topRight.classList.add("top-right");
-    icon.classList.add("highlight-icon");
-    temp.classList.add("highlight-temp");
-    dateTime.classList.add("highlight-datetime");
-    desc.classList.add("highlight-desc");
+    top.classList.add("banner-top");
+    topLeft.classList.add("banner-top-left");
+    topRight.classList.add("banner-top-right");
+    icon.classList.add("banner-icon");
+    temp.classList.add("banner-temp");
+    dateTime.classList.add("banner-datetime");
+    desc.classList.add("banner-desc");
 
-    import(`../assets/icons/weather/${highlight.icon}.svg`).then((module) => {
+    import(`../assets/icons/weather/${weatherData.icon}.svg`).then((module) => {
         icon.src = module.default;
     });
-    temp.innerHTML = `${highlight.temp}<span class="temp-unit">&deg;C</span>`;
-    dateTime.textContent = highlight.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
-    desc.textContent = highlight.conditions;
+    temp.innerHTML = `${weatherData.temp}<span class="temp-unit">&deg;C</span>`;
+    if (curr) {
+        temp.innerHTML = temp.innerHTML + ` <span>Feels like ${weatherData.feelslike}°C</span>`;
+    }
+    dateTime.textContent = weatherData.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
+    desc.textContent = weatherData.conditions;
 
     const bottom = document.createElement("div");
     const statGroup = document.createElement("div");
@@ -108,17 +114,23 @@ function createHighlightWeather(highlight) {
     statGroup.appendChild(wind);
     statGroup.appendChild(uvIndex);
 
-    bottom.classList.add("highlight-bottom");
-    statGroup.classList.add("highlight-stat-group");
-    precip.classList.add("highlight-stat");
-    humidity.classList.add("highlight-stat");
-    wind.classList.add("highlight-stat");
-    uvIndex.classList.add("highlight-stat");
+    bottom.classList.add("banner-bottom");
+    statGroup.classList.add("banner-stat-group");
+    precip.classList.add("banner-stat");
+    humidity.classList.add("banner-stat");
+    wind.classList.add("banner-stat");
+    uvIndex.classList.add("banner-stat");
 
-    precip.textContent = `Precipitation: ${highlight.precipprob}%`;
-    humidity.textContent = `Humidity: ${highlight.humidity}`;
-    wind.textContent = `Wind: ${highlight.windspeed}`;
-    uvIndex.textContent = `UV Index: ${highlight.uvindex}`;
+    precip.textContent = `Precipitation: ${weatherData.precipprob}%`;
+    humidity.textContent = `Humidity: ${weatherData.humidity}`;
+    wind.textContent = `Wind: ${weatherData.windspeed}`;
+    uvIndex.textContent = `UV Index: ${weatherData.uvindex}`;
+    if (!curr) {
+        const desc = document.createElement("p");
+        statGroup.appendChild(desc);
+        desc.classList.add("banner-stat");
+        desc.textContent = weatherData.description;
+    }
 
     return container
 }
@@ -149,15 +161,16 @@ function createForecasts(days) {
             icon.src = module.default;
         });
         temp.classList.add("temp");
-        temp.innerHTML = `${day.tempmax}<span class="temp-unit">&deg;</span> | ${day.tempmin}<span class="temp-unit">&deg;</span>`;
+        temp.innerHTML = `${day.tempmin}<span class="temp-unit">&deg;</span> | ${day.tempmax}<span class="temp-unit">&deg;</span>`;
     
         btn.addEventListener("click", () => {
             const btns = [...document.querySelectorAll(".forecast")];
             btns.forEach((b) => b.classList.remove("active"));
 
             const weather = document.querySelector("#weather");
-            const newHighlight = createHighlightWeather(day);
-            weather.replaceChild(newHighlight, weather.firstChild);
+            const oldHighlight = document.querySelector(".highlight");
+            const newHighlight = createWeatherBanner(day);
+            weather.replaceChild(newHighlight, oldHighlight);
             btn.classList.add("active");
         });
     });
@@ -170,10 +183,20 @@ function showWeather(weatherData) {
 
     const content = document.querySelector(".content");
     const weather = document.createElement("section");
+    const currHeading = document.createElement("p");
+    const forecastHeading = document.createElement("p");
     content.appendChild(weather);
-    weather.appendChild(createHighlightWeather(weatherData.days[0]));
+    weather.appendChild(currHeading);
+    weather.appendChild(createWeatherBanner(weatherData.currentConditions, true));
+
+    weather.appendChild(forecastHeading);
     weather.appendChild(createForecasts(weatherData.days));
+    weather.appendChild(createWeatherBanner(weatherData.days[0]));
     weather.id = "weather";
+    currHeading.classList.add("heading");
+    currHeading.textContent = "Current Weather";
+    forecastHeading.classList.add("heading");
+    forecastHeading.textContent = "Weather Forecast";
 }
 
 const form = document.querySelector("form");
