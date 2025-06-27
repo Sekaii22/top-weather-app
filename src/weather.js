@@ -14,7 +14,7 @@ function processWeatherData(data) {
         address: data.resolvedAddress,
         description: data.description,
         currentConditions: {
-            date: new Date(data.days[0].datetime),
+            date: new Date(data.currentConditions.datetimeEpoch * 1000),
             conditions: data.currentConditions.conditions,
             icon: data.currentConditions.icon,
             description: data.days[0].description,

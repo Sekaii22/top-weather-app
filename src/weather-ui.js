@@ -44,8 +44,9 @@ function createWeatherBanner(weatherData, curr=false) {
     temp.innerHTML = `${weatherData.temp}<span class="temp-unit">&deg;C</span>`;
     if (curr) {
         temp.innerHTML = temp.innerHTML + ` <span>Feels like ${weatherData.feelslike}°C</span>`;
+        dateTime.textContent = weatherData.date.toLocaleTimeString(undefined, {hour: "numeric"}) + ", ";
     }
-    dateTime.textContent = weatherData.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
+    dateTime.textContent = dateTime.textContent + weatherData.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
     desc.textContent = weatherData.conditions;
 
     const bottom = document.createElement("div");
