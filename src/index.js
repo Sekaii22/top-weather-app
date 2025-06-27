@@ -1,6 +1,6 @@
 import "./styles.css";
 import { getWeather } from "./weather";
-import { removeWeather, showWeather, showLoading, showError } from "./weather-ui";
+import { showWeather, showLoading, showError } from "./weather-ui";
 
 const form = document.querySelector("form");
 const input = document.querySelector("#search-input");

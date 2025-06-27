@@ -7,7 +7,7 @@ function removeWeather() {
     }
 }
 
-function createWeatherBanner(weatherData, curr=false) {
+function createWeatherBanner(dayData, curr=false) {
     const container = document.createElement("div");
     container.classList.add("weather-banner");
     if (!curr) {
@@ -38,16 +38,16 @@ function createWeatherBanner(weatherData, curr=false) {
     dateTime.classList.add("banner-datetime");
     desc.classList.add("banner-desc");
 
-    import(`../assets/icons/weather/${weatherData.icon}.svg`).then((module) => {
+    import(`../assets/icons/weather/${dayData.icon}.svg`).then((module) => {
         icon.src = module.default;
     });
-    temp.innerHTML = `${weatherData.temp}<span class="temp-unit">&deg;C</span>`;
+    temp.innerHTML = `${dayData.temp}<span class="temp-unit">&deg;C</span>`;
     if (curr) {
-        temp.innerHTML = temp.innerHTML + ` <span>Feels like ${weatherData.feelslike}°C</span>`;
-        dateTime.textContent = weatherData.date.toLocaleTimeString(undefined, {hour: "numeric"}) + ", ";
+        temp.innerHTML = temp.innerHTML + ` <span>Feels like ${dayData.feelslike}°C</span>`;
+        dateTime.textContent = dayData.date.toLocaleTimeString(undefined, {hour: "numeric"}) + ", ";
     }
-    dateTime.textContent = dateTime.textContent + weatherData.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
-    desc.textContent = weatherData.conditions;
+    dateTime.textContent = dateTime.textContent + dayData.date.toLocaleDateString(undefined, {weekday: "long", year: "numeric", month: "short", day: "numeric"});
+    desc.textContent = dayData.conditions;
 
     const bottom = document.createElement("div");
     const statGroup = document.createElement("div");
@@ -69,15 +69,15 @@ function createWeatherBanner(weatherData, curr=false) {
     wind.classList.add("banner-stat");
     uvIndex.classList.add("banner-stat");
 
-    precip.textContent = `Precipitation: ${weatherData.precipprob}%`;
-    humidity.textContent = `Humidity: ${weatherData.humidity}`;
-    wind.textContent = `Wind: ${weatherData.windspeed}`;
-    uvIndex.textContent = `UV Index: ${weatherData.uvindex}`;
+    precip.textContent = `Precipitation: ${dayData.precipprob}%`;
+    humidity.textContent = `Humidity: ${dayData.humidity}`;
+    wind.textContent = `Wind: ${dayData.windspeed}`;
+    uvIndex.textContent = `UV Index: ${dayData.uvindex}`;
     if (!curr) {
         const desc = document.createElement("p");
         statGroup.appendChild(desc);
         desc.classList.add("banner-stat");
-        desc.textContent = weatherData.description;
+        desc.textContent = dayData.description;
     }
 
     return container
@@ -142,7 +142,7 @@ function showWeather(weatherData) {
     weather.appendChild(createWeatherBanner(weatherData.days[0]));
     weather.id = "weather";
     currHeading.classList.add("heading");
-    currHeading.textContent = "Current Weather";
+    currHeading.textContent = `Current Weather in ${weatherData.address}`;
     forecastHeading.classList.add("heading");
     forecastHeading.textContent = "Weather Forecast";
 }
